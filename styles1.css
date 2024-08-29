@@ -1,0 +1,24 @@
+.line-1, .line-2, .line-3 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.line-1 {
+    animation: fadeIn 1s ease-in-out 1s forwards;
+}
+
+.line-2 {
+    animation: fadeIn 1s ease-in-out 3s forwards;
+}
+
+.line-3 {
+    animation: fadeIn 1s ease-in-out 5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

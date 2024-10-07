@@ -1,4 +1,33 @@
 
+// Select the div and set dimensions
+let div1 = d3.select("#div1");
+
+// Declare node variable outside to make it globally accessible
+let node, textElements;
+
+
+// Initialize color variables
+let currentTextColor = "red";
+let currentBgColor = "white";
+
+// Chart dimensions 
+const width = 1600;
+const height = 1600;
+const marginTop = 10;
+
+// Append the SVG container to div1
+const svg1 = div1.append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("id", "Grant Tree");
+
+// Append a rectangle as the background for the SVG
+const background = svg1.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "white");  // Initial background color
+
+
 
 const csvFiles = ["Challenge Programs.csv", "Digital Humanities.csv", "Education.csv", "FedState Partnership.csv", "Preservation Access.csv",
     "Public Programs.csv", "Research Programs.csv"
@@ -31,6 +60,22 @@ function getDivisionName(filename) {
     return filename.replace(".csv", "").replace(/-/g, ' ').replace(/_/g, ' ');
 }
 
+
+/**function updateNodeTextColors() {
+    const isLightMode = document.body.classList.contains('light-mode');
+    const newTextColor = isLightMode ? "black" : "white";
+
+    // Update the text color in the D3 nodes based on the current mode
+    d3.selectAll(".node text").style("fill", d => d.data.color || newTextColor);
+}
+
+// Update event listener for toggle button
+document.querySelector('.toggle-button button').addEventListener('click', () => {
+    toggleLightDarkMode();  // Call the toggle function
+}); */
+// Function to update node text colors based on current mode
+
+
 // Function to draw the tree
 function drawTree(root) {
     const svg = d3.select("svg"),
@@ -59,7 +104,7 @@ function drawTree(root) {
             .y(d => d.x));
 
     // Create nodes
-    const node = g.selectAll(".node")
+    node = g.selectAll(".node")
         .data(root.descendants())
         .enter().append("g")
         .attr("class", "node")
@@ -91,45 +136,41 @@ function drawTree(root) {
             }
         });
 
-    //https://www.neh.gov/divisions/challenge
-    //https://www.neh.gov/divisions/odh
-    //https://www.neh.gov/divisions/education
-    //https://www.neh.gov/divisions/fedstate
-    //https://www.neh.gov/divisions/preservation
-    //https://www.neh.gov/divisions/public
-    //https://www.neh.gov/divisions/research
-
     // Add circles for nodes
     node.append("circle")
         .attr("r", 3);
 
-    // Check if the body has 'light-mode' class and set text color accordingly
-    const isLightMode = document.body.classList.contains('light-mode');
-
-    // Set text color based on mode (default black or white for light/dark mode)
-    const textColor = isLightMode ? "black" : "white";
-    // Add text labels for nodes with word wrap
-    node.append("text")
+    // Add text labels for nodes with word wrap and assign textElements globally
+    textElements = node.append("text")
         .attr("dy", .3)
         .attr("dx", d => d.children ? -4 : 4)
         .style("text-anchor", d => d.children ? "end" : "start")
         .style("font-size", "13px")
-        .style("fill", d => d.data.color || textColor)  // Adjust color based on mode
+        .style("fill", currentTextColor)  // Initial text color
         .text(d => d.data.name + (d.data.output ? `: ${d.data.output}` : ''))
         .call(wrapText, 800);  // Max width for wrapping text
-
 }
 
-// Update text color dynamically when the mode changes
-document.querySelector('.toggle-button button').addEventListener('click', () => {
-    const isNowLightMode = document.body.classList.contains('light-mode');
-    const newTextColor = isNowLightMode ? "black" : "white";
+//let textElements = drawTree(root);
 
-    // Update the text color in the D3 nodes based on the current mode
-    node.selectAll("text").style("fill", d => d.data.color || newTextColor);
-});
+// Append a button
+div1.append("button")
+    .text("Change Text and Background Color")
+    .on("click", function () {
+        // Toggle colors between red/white for text and black/white for background
+        currentTextColor = currentTextColor === "red" ? "white" : "red";
+        currentBgColor = currentBgColor === "white" ? "black" : "white";
 
-// Function to wrap text with controlled line height and avoid excessive space
+        // Update the text color in the SVG
+        if (textElements) {
+            textElements.attr("fill", currentTextColor);  // Update text color globally
+        }
+
+        // Update the background color
+        background.attr("fill", currentBgColor);
+    });
+
+// Function to wrap text
 function wrapText(text, width) {
     text.each(function () {
         var text = d3.select(this),
@@ -137,7 +178,7 @@ function wrapText(text, width) {
             word,
             line = [],
             lineNumber = 0,
-            lineHeight = .8,  // Reduced line height to 1.1 to minimize vertical spacing
+            lineHeight = .8,  // line height 
             y = text.attr("y"),
             dy = parseFloat(text.attr("dy")),
             tspan = text.text(null).append("tspan").attr("x", 2).attr("y", y).attr("dy", dy + "em");
@@ -154,9 +195,3 @@ function wrapText(text, width) {
         }
     });
 }
-
-function toggleLightDarkMode() {
-    const body = document.body;
-    body.classList.toggle("light-mode");
-}
-

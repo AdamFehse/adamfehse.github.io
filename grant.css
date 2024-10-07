@@ -45,7 +45,12 @@ body {
 .node text {
     font-display: 0;
     font-weight: 500;
+    color: red;
     /*comments*/
+}
+
+.light-mode .text {
+    color: blue;
 }
 
 .link {
@@ -56,7 +61,7 @@ body {
 
 /* Light Mode Styles */
 body.light-mode {
-    background-color: white;
+    background-color: rgb(243, 243, 243);
 }
 
 .toggle-button {

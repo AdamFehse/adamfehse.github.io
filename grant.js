@@ -7,8 +7,8 @@ let node, textElements;
 
 
 // Initialize color variables
-let currentTextColor = "red";
-let currentBgColor = "white";
+let currentTextColor = "black";
+let currentBgColor = "#F5F5F5"; //white smoke
 
 // Chart dimensions 
 const width = 1600;
@@ -25,7 +25,7 @@ const svg1 = div1.append("svg")
 const background = svg1.append("rect")
     .attr("width", width)
     .attr("height", height)
-    .attr("fill", "white");  // Initial background color
+    .attr("fill", currentBgColor);  // Initial background color
 
 
 
@@ -146,6 +146,7 @@ function drawTree(root) {
         .attr("dx", d => d.children ? -4 : 4)
         .style("text-anchor", d => d.children ? "end" : "start")
         .style("font-size", "13px")
+        .style("font-weight", 500)  // Initial text color
         .style("fill", currentTextColor)  // Initial text color
         .text(d => d.data.name + (d.data.output ? `: ${d.data.output}` : ''))
         .call(wrapText, 800);  // Max width for wrapping text
@@ -153,6 +154,7 @@ function drawTree(root) {
 
 //let textElements = drawTree(root);
 
+/** 
 // Append a button
 div1.append("button")
     .text("Change Text and Background Color")
@@ -169,6 +171,7 @@ div1.append("button")
         // Update the background color
         background.attr("fill", currentBgColor);
     });
+*/
 
 // Function to wrap text
 function wrapText(text, width) {

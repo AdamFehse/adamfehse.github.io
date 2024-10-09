@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: rgb(21, 16, 0);
+    background-color: rgb(250, 249, 247);
 }
 
 #link {
@@ -9,7 +9,6 @@ body {
 }
 
 #h2 {
-    color: #ffffff;
     text-align: center;
 }
 
@@ -18,7 +17,6 @@ body {
 }
 
 #NEHmain ul {
-    color: #ffffff;
     list-style-position: inside;
     /* Align bullets/numbers with text */
     display: inline-block;

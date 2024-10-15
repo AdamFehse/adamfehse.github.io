@@ -50,36 +50,45 @@ function printChartsForProjects(projectsData) {
     chartsContainer.innerHTML = ''; // Clear any existing charts
 
     projectsData.forEach((project, index) => {
-        // Create a container for the word cloud and bar chart
-        const projectContainer = document.createElement('div');
-        projectContainer.classList.add('project-container');
+        // Create a Bootstrap row for the word cloud and bar chart
+        const projectRow = document.createElement('div');
+        projectRow.classList.add('row', 'mb-4'); // 'mb-4' for margin below each project row
+
+        // Create a Bootstrap column for the word cloud
+        const wordCloudCol = document.createElement('div');
+        wordCloudCol.classList.add('col-lg-6');
 
         // Create a canvas for the word cloud
         const wordCloudCanvasId = `wordCloud-${index}`;
         const wordCloudCanvas = document.createElement('canvas');
-        wordCloudCanvas.id = wordCloudCanvasId;
         wordCloudCanvas.width = 900; // Set canvas width for word cloud
         wordCloudCanvas.height = 400; // Set canvas height for word cloud
-        projectContainer.appendChild(wordCloudCanvas);
+        wordCloudCanvas.id = wordCloudCanvasId;
+        wordCloudCol.appendChild(wordCloudCanvas); // Append canvas to the word cloud column
+
+        // Create a Bootstrap column for the bar chart
+        const barChartCol = document.createElement('div');
+        barChartCol.classList.add('col-lg-6');
 
         // Create a canvas for the bar chart
         const barChartCanvasId = `barChart-${index}`;
         const barChartCanvas = document.createElement('canvas');
         barChartCanvas.id = barChartCanvasId;
-        barChartCanvas.height = '250 px'; // Set canvas height for bar chart
-        barChartCanvas.width = '250 px'; 
-        projectContainer.appendChild(barChartCanvas);
+        barChartCol.appendChild(barChartCanvas); // Append canvas to the bar chart column
 
-        // Append the project container to the main charts container
-        chartsContainer.appendChild(projectContainer);
+        // Append both columns to the row
+        projectRow.appendChild(wordCloudCol);
+        projectRow.appendChild(barChartCol);
 
-        // Generate a word cloud for the project
+        // Append the row to the main charts container
+        chartsContainer.appendChild(projectRow);
+
+        // Generate the word cloud and bar chart
         createWordCloud(project.title, generateKeywordList(project.fullText), wordCloudCanvasId);
-
-        // Generate a bar chart for the project
         createBarChart(project.title, generateKeywordList(project.fullText), barChartCanvasId);
     });
 }
+
 
 // Function to create a bar chart using Chart.js
 function createBarChart(projectTitle, keywordList, canvasId) {
@@ -166,7 +175,7 @@ function createWordCloud(projectTitle, keywordList, canvasId) {
         ctx.textAlign = "center";
         
         // Randomly position words
-        const x = xOffset + (Math.random() - 0.5) * (canvas.width - 100); // Random x within the canvas
+        const x = xOffset + (Math.random() - 0.5) * (canvas.width - 150); // Random x within the canvas
         const y = yOffset + (Math.random() - 0.5) * (canvas.height - 100); // Random y within the canvas
 
         // Draw the text

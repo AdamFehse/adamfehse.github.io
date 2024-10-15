@@ -58,8 +58,8 @@ function printChartsForProjects(projectsData) {
         const wordCloudCanvasId = `wordCloud-${index}`;
         const wordCloudCanvas = document.createElement('canvas');
         wordCloudCanvas.id = wordCloudCanvasId;
-        wordCloudCanvas.width = 500; // Set canvas width for word cloud
-        wordCloudCanvas.height = 300; // Set canvas height for word cloud
+        wordCloudCanvas.width = 900; // Set canvas width for word cloud
+        wordCloudCanvas.height = 400; // Set canvas height for word cloud
         projectContainer.appendChild(wordCloudCanvas);
 
         // Create a canvas for the bar chart

@@ -1,0 +1,21 @@
+#charts-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    align-items: flex-start; /* Align items at the start */
+    justify-content: center; /* Center items horizontally */
+}
+
+.project-container {
+    display: flex; /* Use flexbox for aligning word cloud and bar chart */
+    flex-direction: column; /* Stack them vertically */
+    align-items: center; /* Center items horizontally */
+    margin: 10px; /* Add some margin around each project */
+    width: 100%; /* Ensure it takes full width of parent */
+}
+
+canvas {
+    margin: 5px; /* Add space between the canvases */
+    max-width: 100%; /* Ensures canvas does not overflow its container */
+    box-sizing: border-box; /* Ensures padding and margin are included in width/height */
+    display: block; /* Ensure it's a block element */
+}

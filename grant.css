@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(250, 249, 247);
+}
+
+#link {
+    color: #c300ff;
+    font-weight: 700;
+}
+
+#h2 {
+    text-align: center;
+}
+
+#NEHmain {
+    text-align: center;
+}
+
+#NEHmain ul {
+    list-style-position: inside;
+    /* Align bullets/numbers with text */
+    display: inline-block;
+    /* Center the list */
+    text-align: left;
+    /* text is aligned left */
+}
+
+#NEHmain li {
+    padding-left: 10px;
+    /* Adjust for any extra alignment */
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: #00ccff;
+    stroke: rgb(38, 0, 255);
+    stroke-width: 1px;
+}
+
+.node text {
+    font-display: 0;
+    font-weight: 500;
+    color: red;
+    /*comments*/
+}
+
+.light-mode .text {
+    color: blue;
+}
+
+.link {
+    fill: none;
+    stroke: #5e5d6148;
+    stroke-width: 3px;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: rgb(243, 243, 243);
+}
+
+.toggle-button {
+    display: flex;
+    /* Use flexbox */
+    justify-content: center;
+    /* Center horizontally */
+    margin: 20px auto;
+    /* Add margin to center it in the container */
+}
+
+.toggle-button button {
+    background-color: rgb(21, 16, 0);
+    /* Set the background color */
+    color: rgb(6, 59, 134);
+    /* Set the text color */
+    border: none;
+    /* Remove default border */
+    border-radius: 5px;
+    /* Add rounded corners */
+    cursor: pointer;
+    /* Change cursor on hover */
+    transition: color 0.3s;
+    /* Smooth transition for text color */
+}
+
+/* Hover effect */
+.toggle-button button:hover {
+    color: #ffffff;
+    /* Change text color on hover */
+}
+
+/* Focus effect */
+.toggle-button button:focus {
+    outline: none;
+}
+
+/* Light Mode Button Styles */
+.light-mode .toggle-button button {
+    background-color: transparent;
+    /* Make background transparent */
+    color: #9f9e9e;
+    /* Change text color */
+}
+
+/* Hover effect in light mode */
+.light-mode .toggle-button button:hover {
+    color: #0008ff;
+    /* Change text color on hover */
+}
+
+.light-mode #NEHmain,
+.light-mode #NEHmain ul,
+.light-mode #NEHmain li {
+    color: black;
+    /* Change text color to black in light mode */
+}
+
+.light-mode #h2 {
+    color: black;
+}
+
+.light-mode .node circle {
+    fill: #007acc;
+    stroke: #005499;
+}
+
+.light-mode .link {
+    stroke: #ccc;
+    /* Change link color for light mode */
+}

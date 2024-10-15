@@ -66,8 +66,8 @@ function printChartsForProjects(projectsData) {
         const barChartCanvasId = `barChart-${index}`;
         const barChartCanvas = document.createElement('canvas');
         barChartCanvas.id = barChartCanvasId;
-        barChartCanvas.width = '250 px'; // Set canvas width for bar chart
         barChartCanvas.height = '250 px'; // Set canvas height for bar chart
+        barChartCanvas.width = '250 px'; 
         projectContainer.appendChild(barChartCanvas);
 
         // Append the project container to the main charts container
@@ -85,10 +85,10 @@ function printChartsForProjects(projectsData) {
 function createBarChart(projectTitle, keywordList, canvasId) {
     const ctx = document.getElementById(canvasId).getContext('2d');
 
-    // Get the top 5 keywords
+    // Get the top X keywords
     const topKeywords = keywordList.slice(0, 10);
     
-    // Map the labels and data using only the top 5 keywords
+    // Map the labels and data using only the top X keywords
     const labels = topKeywords.map(([word]) => word); // Extract words for labels
     const data = topKeywords.map(([, count]) => count); // Extract counts for data
 

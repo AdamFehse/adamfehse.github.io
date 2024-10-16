@@ -8,15 +8,26 @@ function getRandomColor() {
     return color;
 }
 
-// Function to extract title, description, and text content from each project card
-function extractTextFromProjects() {
-    const projectCards = document.querySelectorAll('.card');
+// Function to extract title, description, and text content from an external HTML file
+function extractTextFromProjects(htmlContent) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const projectCards = doc.querySelectorAll('.card');  // Look for .card in the loaded document
     let projectsData = [];
+    let totalKeywordFrequency = {}; // Object to hold total keyword frequencies
 
     projectCards.forEach(card => {
         const title = card.querySelector('.card-title').innerText.trim();
         const description = card.querySelector('.card-text').innerText.trim();
         const fullText = title + ' ' + description;
+
+        // Generate keywords for this project
+        const keywords = generateKeywordList(fullText);
+
+        // Store keyword frequencies for this project
+        keywords.forEach(([word, count]) => {
+            totalKeywordFrequency[word] = (totalKeywordFrequency[word] || 0) + count;
+        });
 
         // Store each project with its title and text content
         projectsData.push({ title, fullText });
@@ -24,7 +35,6 @@ function extractTextFromProjects() {
 
     return projectsData;
 }
-
 // Function to clean text, remove common stopwords, and generate a keyword list
 function generateKeywordList(text) {
     const cleanedText = text.toLowerCase().replace(/[^\w\s]/g, '');
@@ -87,8 +97,40 @@ function printChartsForProjects(projectsData) {
         createWordCloud(project.title, generateKeywordList(project.fullText), wordCloudCanvasId);
         createBarChart(project.title, generateKeywordList(project.fullText), barChartCanvasId);
     });
+
+    // After printing individual charts, create aggregate charts
+    //createAggregateCharts();
 }
 
+// Function to create aggregate charts after loading all projects
+function createAggregateCharts() {
+    const aggregateChartsContainer = document.getElementById('aggregate-charts-container');
+    aggregateChartsContainer.innerHTML = ''; // Clear any existing aggregate charts
+
+    // Create a canvas for the aggregate word cloud
+    const aggregateWordCloudCanvasId = 'aggregateWordCloud';
+    const aggregateWordCloudCanvas = document.createElement('canvas');
+    aggregateWordCloudCanvas.id = aggregateWordCloudCanvasId;
+    aggregateWordCloudCanvas.width = 900; // Set canvas width for aggregate word cloud
+    aggregateWordCloudCanvas.height = 400; // Set canvas height for aggregate word cloud
+    aggregateChartsContainer.appendChild(aggregateWordCloudCanvas); // Append canvas to the container
+
+    // Create a canvas for the aggregate bar chart
+    const aggregateBarChartCanvasId = 'aggregateBarChart';
+    const aggregateBarChartCanvas = document.createElement('canvas');
+    aggregateBarChartCanvas.id = aggregateBarChartCanvasId;
+    aggregateChartsContainer.appendChild(aggregateBarChartCanvas); // Append canvas to the container
+
+    // Generate the aggregate word cloud and bar chart
+    createWordCloud('Aggregate Word Cloud', generateKeywordListFromTotal(), aggregateWordCloudCanvasId);
+    createBarChart('Aggregate Keyword Frequency', generateKeywordListFromTotal(), aggregateBarChartCanvasId);
+}
+
+// Function to generate keyword list from total keyword frequency
+function generateKeywordListFromTotal() {
+    const sortedKeywords = Object.entries(totalKeywordFrequency).sort((a, b) => b[1] - a[1]);
+    return sortedKeywords;
+}
 
 // Function to create a bar chart using Chart.js
 function createBarChart(projectTitle, keywordList, canvasId) {
@@ -96,7 +138,7 @@ function createBarChart(projectTitle, keywordList, canvasId) {
 
     // Get the top X keywords
     const topKeywords = keywordList.slice(0, 10);
-    
+
     // Map the labels and data using only the top X keywords
     const labels = topKeywords.map(([word]) => word); // Extract words for labels
     const data = topKeywords.map(([, count]) => count); // Extract counts for data
@@ -144,7 +186,7 @@ function createBarChart(projectTitle, keywordList, canvasId) {
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(tooltipItem) {
+                        label: function (tooltipItem) {
                             return `${tooltipItem.label}: ${tooltipItem.raw}`; // Custom tooltip format
                         }
                     }
@@ -173,7 +215,7 @@ function createWordCloud(projectTitle, keywordList, canvasId) {
         ctx.font = `${fontSize}px Arial`;
         ctx.fillStyle = getRandomColor(); // Random color for each word
         ctx.textAlign = "center";
-        
+
         // Randomly position words
         const x = xOffset + (Math.random() - 0.5) * (canvas.width - 150); // Random x within the canvas
         const y = yOffset + (Math.random() - 0.5) * (canvas.height - 100); // Random y within the canvas
@@ -183,18 +225,19 @@ function createWordCloud(projectTitle, keywordList, canvasId) {
     });
 }
 
-// Function to get a random color for the words
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+// Function to load HTML from another file and extract text
+function loadProjectCards() {
+    fetch('projectCards.html')  // Load an external HTML file
+        .then(response => response.text())
+        .then(data => {
+            // Extract text from project cards in the loaded HTML
+            const projectsData = extractTextFromProjects(data);
+            printChartsForProjects(projectsData);  // Do something with the extracted data
+        })
+        .catch(error => console.error('Error loading project cards:', error));
 }
 
-// After DOM is loaded, extract text, generate keyword list, and display charts
-document.addEventListener('DOMContentLoaded', () => {
-    const projectsData = extractTextFromProjects();
-    printChartsForProjects(projectsData);
+// Call the function after DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    loadProjectCards();
 });

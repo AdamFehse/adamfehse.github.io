@@ -43,7 +43,10 @@ function generateKeywordList(text) {
     const cleanedText = text.toLowerCase().replace(/[^\w\s]/g, '');
     const words = cleanedText.split(/\s+/);
 
-    const stopwords = ['the', 'and', 'in', 'of', 'to', 'a', 'with', 'for', 'on', 'is', 'by', 'an', 'it', 'as', 'are'];
+    const stopwords = ['the', 'and', 'in', 'of', 'to', 'a', 'with', 'for', 'on', 'is', 'by', 'an', 'it', 'as', 'are',
+        'will', 'has', 'their', 'from', 'how', 'that', 'this', 'was', 'have', 'these', 'through', 'these' , ' was',
+        'who ', 'Was', 'Who', 'Has', 'Will', 'That', 'They'
+    ];
     const wordFrequency = {};
 
     words.forEach(word => {

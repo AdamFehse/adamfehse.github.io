@@ -21,7 +21,6 @@
 
         .column {
             flex: 50%;
-            /* Adjust as needed for two columns */
             padding: 10px;
         }
 
@@ -49,7 +48,7 @@
 
     <h1>Keyword Frequency Aggregation</h1>
 
-    <!-- Two rows for visualizations -->
+    <!-- Two rows -->
     <div class="row">
         <!-- First row: Bar Chart -->
         <div class="column">
@@ -84,7 +83,7 @@
             return sortedKeywords.slice(0, n);
         }
 
-        // Function to display the bar chart using D3.js for top 50 keywords
+        // Function to display the bar chart using D3 for top 50 keywords
         function displayBarChart(topKeywords) {
             const data = topKeywords.map(([key, value]) => ({ keyword: key, frequency: value }));
 
@@ -125,7 +124,7 @@
                 .call(d3.axisBottom(x));
         }
 
-        // Function to create a word cloud using D3.js
+        // Function to create a word cloud using D3
         function createWordCloud(topKeywords) {
             const wordCloudDiv = document.getElementById('word-cloud');
             const width = wordCloudDiv.clientWidth;

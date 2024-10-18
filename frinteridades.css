@@ -15,8 +15,8 @@
 
 .project-container canvas {
     width: 100%; /* Use full width of the container */
-    min-height: 300px; /* Set a minimum height to ensure it's not too small */
-    max-width: 100%; /* Ensure the canvas doesn't overflow its container */
-    box-sizing: border-box; /* Include padding/margin in width calculations */
+    min-height: 300px; /* Set a minimum height */
+    max-width: 100%; 
+    box-sizing: border-box;
     display: block;
 }

@@ -222,4 +222,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-console.log(totalKeywordFrequency);
+//console.log(totalKeywordFrequency); // Test if you want to see the whole list.

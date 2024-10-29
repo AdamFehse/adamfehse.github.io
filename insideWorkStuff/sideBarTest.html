@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="sideBarTest.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <title>Side Bar Test</title>
+</head>
+
+<body>
+
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-end show bg-dark" id="side">
+        <button class="btn btn-primary offcanvas-btn position-absolute mt-2" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#side">
+            <span>Open</span><span>Close</span>
+        </button>
+
+        <!-- Title/Header of sidebar -->
+        <div class="offcanvas-header justify-content-center bg-primary p-1">
+            <h1 class="offcanvas-title" id="glow">Story Map</h1>
+        </div>
+
+        <div class="offcanvas-body d-flex flex-column bg-light">
+
+                <div class="row">
+                    <!-- Art-Based Projects Column -->
+                    <div class="col px-1" id="categories">
+                        <h6 class="bg-primary text-white p-2 text-center border border-3" role="button"
+                        onclick="showContent('Art-Based Projects', '')" >Art-Based <br> Projects</h6>
+                        <ul class="list-group m-0 p-0 list-group-flush fw-bold">
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Art-Based Projects', 'Collective Art')">
+                                Collective Art</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Art-Based Projects', 'Film and Audio')">Film and Audio</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Art-Based Projects', 'Multimedia')">
+                                Multimedia</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                            onclick="showContent('Art-Based Projects', 'Murals')">
+                            Murals</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                            onclick="showContent('Art-Based Projects', 'Paintings')">
+                            Painting</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                            onclick="showContent('Art-Based Projects', 'Photogrpahy')">
+                            Photogrpahy</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                            onclick="showContent('Art-Based Projects', 'Public Art Installation')">
+                            Public Art Installation</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                            onclick="showContent('Art-Based Projects', 'Theater & Other Live Performancer')">
+                            Theater & Other Live Performancer</li>
+
+                        </ul>
+                    </div>
+                    <!-- Research Projects Column -->
+                    <div class="col px-1" id="categories" >
+                        <h6 class="bg-primary text-white p-2 text-center border border-3">Research <br> Projects</h6>
+                        <ul class="list-group list-group-flush fw-bold">
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Chicanx Studies')">
+                                Chicanx Studies</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Education')">
+                                Education</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Gender')">
+                                Gender</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Human Rights')">
+                                Human Rights</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Language')">
+                                Language</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Environmental Justce')">
+                                Environmental Justce</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Research Projects', 'Place and Identity')">
+                                Place and Identity</li>
+                        </ul>
+                    </div>
+                    <!-- Education and Community Outreach Projects Column -->
+                    <div class="col px-1" id="categories" style="overflow-y:hidden;"  >
+                        <h6 class="bg-primary text-white p-2 text-center border border-3">Education and Outreach</h6>
+                        <ul class="list-group list-group-flush fw-bold">
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Education & Community Outreach', 'Speaker Series')">Speaker Series</li>
+                            <li class="list-group-item list-group-item-light list-group-item-action" role="button"
+                                onclick="showContent('Education & Community Outreach', 'Experiential Leanring')">Experiential Leanring</li>
+                            <li class="list-group-item list-group-item-dark list-group-item-action" role="button"
+                                onclick="showContent('Education & Community Outreach', 'Community Engagement')">Community Engagement</li>
+                        </ul>
+                    </div>
+                    <!-- Search By Keywords Column -->
+                    <div class="col-2 px-1" id="categories" >
+                        <h6>Search By Keywords</h6>
+                        <input type="text" class="form-control mb-3" placeholder="Search">
+                        <ul class="list-group list-group-flush fw-bold">
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 1)">1</li>
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 2)">2</li>
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 1)">1</li>
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 2)">2</li>
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 1)">1</li>
+                            <li class="list-group-item list-group-item-action" role="button" onclick="showContent('Search By Keywords', 2)">2</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Main content area -->
+                <div class="container mt-4 border container d-flex flex-grow-1 align-items-center justify-content-center border" id="contentContainer">
+                    <div class="row ">
+                        <div class="col-12 ">
+                            <div id="mainContent">
+                                <!-- Dynamic content will be shown here -->
+                                <h3 class="text-center">Content Area</h3>
+                                <p class="text-center">Click a keyword to display relevant content here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Map container -->
+    <div id="map"></div>
+
+        <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="leaflet.js"></script>
+    <script src="leafLefttest.js"></script>
+    <script src="sideBarTest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.js"></script>
+</body>
+
+</html>

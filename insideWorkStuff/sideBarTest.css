@@ -1,0 +1,89 @@
+.offcanvas-btn {
+  left: -4.2rem;
+  visibility: visible;
+}
+
+/* optional junk to toggle the button text */
+.offcanvas-btn span:last-child,
+.offcanvas.show .offcanvas-btn span:first-child {
+  display: none;
+}
+
+.offcanvas.show .offcanvas-btn span:last-child {
+  display: inline;
+}
+
+#side {
+  width: 33.5%;
+}
+
+#map {
+  height: 100vh;
+}
+
+
+#scrollableTableContainer {
+  max-height:26.25em;
+  max-width: max-content; 
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+#mainContent h3 {
+  margin-bottom: 1rem;
+}
+
+
+/* Use margin-top: auto to push contentContainer to the bottom */
+#contentContainer {
+  margin-top: auto;
+  
+}
+
+#categories {
+  height: 15rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+
+#glow {
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #e60000, 0 0 60px #2300e6, 0 0 70px #ff0000;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ff0000, 0 0 60px #241986, 0 0 70px #ffffff, 0 0 80px #ffffff;
+  }
+}
+
+.image-cell {
+  width: 100px; /* Width of the image cell */
+  vertical-align: middle;
+}
+
+.image-placeholder {
+  width: 100%;               /* Full width of parent */
+  padding-top: 0;            /* Remove padding */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;             /* Set height to match image cell width for square ratio */
+}
+
+.image-placeholder img {
+  width: 100%;               /* fully fit within the placeholder */
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;        /* rounded corners */
+}
+

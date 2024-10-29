@@ -1,0 +1,155 @@
+
+
+.sidebar {
+    position: fixed;
+    bottom: 5%;
+    right: 0;
+    border-radius: 0%;
+    height: 60%; /* Height of sidebar */
+    width: 40%; /* Width of sidebar */
+    background-color: #7a7a7aec; /* Background color for the whole sidebar */
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    display: flex; 
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Sidebar content area */
+.sidebar .side-content {
+    display: flex; /* Flexbox for side links and content */
+    justify-content: space-evenly;
+   
+}
+
+.collapsed {
+    transform: translateX(99%);
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 0vh;
+    right: 100%;
+    background-color: #b10fb1c4;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Styles for sidebar content */
+.sidebar .top-links {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sidebar .top-links a {
+    text-align: center;
+    background-color: #00e1ff;
+    margin-right: 5px;
+    border-radius: 0px;
+}
+
+/* Styles for the vertical side links */
+.sidebar .side-links {
+    margin-top: 1em; /* moves everything up or down */
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column; /* Arrange links in a column */
+    align-items: flex-start; /* Align items to the left */
+    margin-right: .5em; /* Space between vertical links and content */
+}
+.sidebar .side-links a {
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 150px; /* Width for buttons */
+    height: 40px; /* Height for  buttons */
+    background-color: #464646; /* Background color for links */
+    text-decoration: none; /* No underline */
+    color: rgb(255, 255, 255); /* Text color */
+    margin-bottom: 2em; /* Space between buttons */
+}
+
+
+.sidebar .top-links a.active {
+    background-color: #aaa;
+}
+
+.sidebar .side-links a:hover {
+    background-color: #1eff00; /* Hover effect */
+}
+
+/* Hide all pages by default */
+.page {
+    display: none;
+}
+
+/* Show active page */
+.page.active {
+    display: block;
+}
+
+/*control content area*/
+.sidebar .content {
+    margin-top: 0; /* move everything up/down */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 225, 255, 0.447); /* bg of link area */
+    flex-grow: 0; /* Allow content area to take remaining space */
+    height: 100%; /* Set a fixed height or a percentage based on your layout */
+    max-height: 22em; /* Set a maximum height to enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-width: 22em;
+}
+
+/* Control content links */
+.sidebar .content .item {
+    display: flex; /* Use flexbox to align items */
+    align-items: right; /* Center items vertically */
+    background-color: #0107a1c1; /* Content boxes color */
+    margin-bottom: 1em; /*  space between boxes */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.sidebar .content .item:hover {
+    background-color: #1eff00;
+}
+
+/* Image style */
+.sidebar .content .item img {
+    width: 60px; /* Fixed width for images */
+    height: 60px; /* Fixed height for images */
+    border-radius: 0%; /* Make images circular */
+    margin: .2em; /* Space between image and text */
+}
+
+/* Title style */
+.sidebar .content .item .title {
+    font-size: 16px; /* Increase font size */
+    font-weight: bold; /* Make title bold */
+    color: #fff; /* White text color */
+}
+
+/* Context style */
+.sidebar .content .item .context {
+    font-size: 14px; /* Slightly smaller font for context */
+    color: #ff0000; /* Light gray for context text */
+    margin-top: 5px; /* Space above context text */
+}
+
+#dynamic-title {
+    text-align: left; 
+    font-size: x-large;
+    color: white;
+    margin-left: 2em;
+    margin-top: .5em; /* Remove default margin */
+    margin-bottom: 0;
+    padding: 5px 0; /* Reduced padding for spacing */
+    background-color: #f5f5f500; /* Light background color for contrast */
+    position: sticky; /* Fixes the title in place */
+    top: 0; /* Sticks to the top of the content area */
+    z-index: 1001; /* Ensure it's above the content area */
+    height: auto; /* Allow height to adjust based on content */
+}

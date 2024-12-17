@@ -75,7 +75,7 @@ function showContent(category, keyword = "") {
   document.querySelectorAll(".project-row").forEach((row) => {
     row.addEventListener("click", () => {
       const projectName = row.getAttribute("data-project-name");
-      //highlightMarker(projectName);
+      highlightMarker(projectName);
     });
   });
 }
@@ -201,7 +201,7 @@ window.defaultIcon = defaultIcon; // Make sure this line is present
 
 // Function to highlight a marker by project name
 function highlightMarker(projectName) {
-  // Reset any previously highlighted marker (if needed)
+  // Reset any previously highlighted marker
   if (window.currentHighlightedMarker && window.defaultIcon) {
     window.currentHighlightedMarker.setIcon(window.defaultIcon);
   }

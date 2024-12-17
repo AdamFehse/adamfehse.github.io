@@ -23,7 +23,7 @@ function showContent(category, keyword = "") {
   const filteredProjects = projectData.filter(
     (project) =>
       project["Project Category"] === category &&
-      (keyword === "" || project["Project Type"] === keyword)
+      (keyword === "" || project["Project Type TEST"] === keyword)
   );
 
   let tableHTML = `

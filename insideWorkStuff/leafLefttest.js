@@ -41,7 +41,7 @@ fetch('overPassTucson.geojson')
                     }
 
 
-                    layer.bindPopup(popupContent);
+                    //layer.bindPopup(popupContent);
                 }
             }
         }).addTo(map);

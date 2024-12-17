@@ -87,3 +87,28 @@
   border-radius: 8px;        /* rounded corners */
 }
 
+/* Set fixed width and height for the modal dialog */
+.modal-dialog {
+  width: 90vw;  /* fixed width */
+  height: 90vh; /* fixed height */
+  max-width: none !important;  /* override Bootstrap defaults */
+  max-height: none !important; /* override Bootstrap defaults */
+}
+
+/* Make the modal-content fill the entire dialog */
+.modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep header and footer at natural size and let body scroll if needed */
+.modal-header,
+.modal-footer {
+  flex: 0 0 auto; 
+}
+
+.modal-body {
+  flex: 1 1 auto;            /* body should take remaining space */
+  overflow-y: auto;          /* enable scrolling if content exceeds set height */
+}

@@ -75,7 +75,7 @@ function showContent(category, keyword = "") {
   document.querySelectorAll(".project-row").forEach((row) => {
     row.addEventListener("click", () => {
       const projectName = row.getAttribute("data-project-name");
-      highlightMarker(projectName);
+      //highlightMarker(projectName);
     });
   });
 }
@@ -223,7 +223,7 @@ function highlightMarker(projectName) {
   
     // Then zoom back in with another smooth fly-to
     setTimeout(() => {
-      map.flyTo(marker.getLatLng(), 19, {
+      map.flyTo(marker.getLatLng(), 17, {
         animate: true,
         duration: 1.5,
         easeLinearity: 0.25

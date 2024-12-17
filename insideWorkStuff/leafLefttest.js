@@ -1,9 +1,10 @@
-map = L.map('map').setView([32.216868, -110.974298], 11);
+map = L.map('map').setView([32.145476, -110.894806], 11);
 
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA',
-    maxZoom: 30
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
 
 // Fetch the GeoJSON file and add it to the map
 fetch('overPassTucson.geojson')
@@ -16,10 +17,10 @@ fetch('overPassTucson.geojson')
                 if (feature.geometry.type === 'Polygon') {
                     return {
                         'color': 'blue',     // Border color for polygons
-                        'opacity': .7,
-                        'weight': 1,        // Border thickness for polygons
-                        'fillColor': 'grey',  // Fill color for polygons
-                        'fillOpacity': 0.01   // Fill opacity for polygons
+                        'opacity': .5,
+                        'weight': .5,        // Border thickness for polygons
+                        //'fillColor': 'red',  // Fill color for polygons
+                        //'fillOpacity': .5   // Fill opacity for polygons
                     };
                 }
                 // Return default style for other geometries (if needed)
